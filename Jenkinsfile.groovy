@@ -32,7 +32,7 @@ pipeline{
             }
         }
         stage("write to a file"){
-            stapes{
+            steps{
                 ws("tmp/"){
                     writeFile text: "Test", file "TestFile"
                 }
