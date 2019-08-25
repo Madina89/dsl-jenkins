@@ -31,5 +31,12 @@ pipeline{
                 }
             }
         }
+        stage("write to a file"){
+            stapes{
+                ws("tmp/"){
+                    writeFile text: "Test", file "TestFile"
+                }
+            }
+        }
     }
 }
