@@ -4,15 +4,15 @@ pipeline{
         stage("Run Command"){
             steps{
                 sh '''
-                set +xe 
+                set +xe
                 echo Hello
-                ech Error
-                yum install httpd -y
+                ech  Error
+                sudo yum install httpd wget unzip -y
                 ping -c 4 google.com
                 '''
             }
         }
-       stage("Download Terraform"){
+        stage("Download Terraform"){
             steps{
                 ws("tmp/"){
                     script {
@@ -33,4 +33,3 @@ pipeline{
         }
     }
 }
-    
