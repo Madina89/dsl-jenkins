@@ -12,5 +12,12 @@ pipeline{
                 '''
             }
         }
+        stage("Download Terrfarm"){
+            steps{
+                ws("/tmp"){
+                    sh "pwd"
+                }
+            }
+        }
     }
 }
