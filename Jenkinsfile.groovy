@@ -1,3 +1,4 @@
+
 pipeline{
     agent any
     stages{
@@ -65,13 +66,17 @@ pipeline{
         }
         stage("Build Image"){
             steps{
-                sh "packer build updated/updated.json"
+                //sh "packer build updated/updated.json"
+                echo "Hello"
             }
         }
     }
     post{
-      success {
-          mail to:  "madinalinux90@gmail.com", subject: "job", body: "job completed"
+        success {
+            echo "Done"
+        }
+        failure {
+            mail to:  "madinalinux89@gmail.com", subject: "job", body: "job completed"
         }
     }
 }
