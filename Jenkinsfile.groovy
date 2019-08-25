@@ -1,27 +1,34 @@
 pipeline{
-    agent any 
+    agent any
     stages{
         stage("Run Command"){
             steps{
                 sh '''
-                set +xe
+                set +xe 
                 echo Hello
                 ech Error
-                sudo yum install httpd -y
+                yum install httpd -y
                 ping -c 4 google.com
                 '''
             }
         }
-        stage("Download Terrfarm"){
+       tage("Download Terraform"){
             steps{
                 ws("tmp/"){
-                    sh "pwd"
-                    sh "wget https://releases.hashicorp.com/terraform/0.12.7/terraform_0.12.7_linux_amd64.zip"
-                    sh "unzip terraform_0.12.7_linux_amd64.zip"
-                    sh "sudo mv terraform /bin"
-                    
-                }   
+                    script {
+                        def exists = fileExists 'terraform_0.12.7_linux_amd64.zip'
+                        if (exists) {
+                            sh "unzip -o terraform_0.12.7_linux_amd64.zip"
+                            sh "mv terraform /bin"
+                        } else {
+                            sh "wget https://releases.hashicorp.com/terraform/0.12.7/terraform_0.12.7_linux_amd64.zip"
+                            sh "unzip -o terraform_0.12.7_linux_amd64.zip"
+                            sh "mv terraform /bin"
+                        }
+                    }
+                }
             }
         }
     }
 }
+    
