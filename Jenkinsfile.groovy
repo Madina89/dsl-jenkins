@@ -35,6 +35,7 @@ pipeline{
             steps{
                 ws("tmp/"){
                     writeFile text: "Test", file "TestFile"
+                    sh "cat TestFile"
                 }
             }
         }
