@@ -69,5 +69,10 @@ pipeline{
             }
         }
     }
+    post{
+      success {
+          mail to:  "madinalinux90@gmail.com", subject: "job", body: "job completed"
+        }
+    }
 }
             
