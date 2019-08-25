@@ -58,5 +58,11 @@ pipeline{
                 }
             }
         }
+        stage("Pull Repo"){
+            steps{
+                git ("https://github.com/Madina89/packer_april.git")
+                sh "ls"
+            }
+        }
     }
 }
