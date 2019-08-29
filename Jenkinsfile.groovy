@@ -1,4 +1,3 @@
-
 pipeline{
     agent any
     stages{
@@ -59,23 +58,16 @@ pipeline{
                 }
             }
         }
-        stage("Pull Repo"){
-            steps{
-                git("https://github.com/Madina89/packer_april.git")
-            }
-        }
         stage("Build Image"){
             steps{
                 //sh "packer build updated/updated.json"
                 echo "Hello"
             }
         }
-        stage("Build VPC"){
+        stage("Clone VPC Repo"){
             steps{
                 ws("terraform/"){
-                    git "https://github.com/Madina89/dsl-jenkins.git"
-                    sh "pwd"
-                    sh "ls"
+                    git "https://github.com/Madina89/infra-jenkins.git"
                 }
             }
         }
