@@ -1,7 +1,6 @@
-
 pipeline{
     agent any
-    parameters {string(defaultValue: "plan", description: "plan,apply,destroy", name: 'USER_ACTION')}
+    parameters {string(defaultValue: "plan", description: "plan, apply, destroy", name: 'USER_ACTION')}
     stages{
         stage("Run Command"){
             steps{
@@ -69,7 +68,7 @@ pipeline{
         stage("Clone VPC Repo"){
             steps{
                 ws("terraform/"){
-                    git "https://github.com/farrukh90/infrastructure_april.git"
+                    git "https://github.com/Madina89/dsl-jenkins.git"
                 }
             }
         }
@@ -101,6 +100,9 @@ pipeline{
         }
         failure {
             mail to:  "madinalinux89@gmail.com", subject: "job", body: "job completed"
+        }
+    }
+}
         }
     }
 }
