@@ -70,6 +70,15 @@ pipeline{
                 echo "Hello"
             }
         }
+        stage("Build VPC"){
+            steps{
+                ws("terraform/"){
+                    git "https://github.com/Madina89/dsl-jenkins.git"
+                    sh "pwd"
+                    sh "ls"
+                }
+            }
+        }
     }
     post{
         success {
