@@ -1,5 +1,7 @@
+
 pipeline{
     agent any
+    properties([parameters([string(defaultValue: 'plan', description: 'plan/apply', name: 'USER_ACTION', trim: true)])])
     stages{
         stage("Run Command"){
             steps{
@@ -71,12 +73,24 @@ pipeline{
                 }
             }
         }
-        stage("Build VPC "){
+        stage("Get module"){
             steps{
                 ws("terraform/"){
                     sh "terraform get"
+                }
+            }
+        }
+        stage("initialize terraform"){
+            steps{
+                ws("terraform/"){
                     sh "terraform init"
-                    sh "terraform  plan -var-file=dev.tfvars"
+                }
+            }
+        }
+         stage("Build VPC "){
+            steps{
+                ws("terraform/"){
+                    sh "terraform  ${USER_ACTION} -var-file=dev.tfvars"
                 }
             }
         }
@@ -89,4 +103,4 @@ pipeline{
             mail to:  "madinalinux89@gmail.com", subject: "job", body: "job completed"
         }
     }
-}       
+}      
